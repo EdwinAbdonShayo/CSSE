@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET Depot</title>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <link rel="Stylesheet" href="style.css">
+</head>
+<body>
+    <div id="webstore">
+        <header>
+            <h1> {{ message }} </h1>
+            <!-- <button v-on:click="checkout"> {{ checkoutText }} checkout</button> -->
+            <button> {{ checkoutText }} checkout</button>
+        </header>
+
+        <main>
+            <figure>
+                <img v-bind:src="product.image" alt="cat image" width="100px" display="flex" flex-direction="column">
+                <h2 v-text="product.title"></h2>
+                <p v-text="product.description"></p>
+                <p>Price: ${{ product.price }}</p>
+            </figure>
+            <button id="add-cart" v-on:click="addcart">add cart</button>
+            <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
+        </main>
+    </div>
+
+    <script>
+        let webstore = new Vue({
+            el: '#webstore',
+            data: {
+                message: 'welcome to my pet store !!!',
+                cartCount: 0,
+                product: {
+                    id: 10001,
+                    title: 'cat food 25 Ib bag',
+                    description: 'my beautiful cat',
+                    price: 2000,
+                    image: 'Media/catFood.png'
+                }
+        },
+
+        computed: {
+            checkoutText() {
+                if (this.cartCount < 1) {
+                    return ``;
+                }
+                else {
+                    return ` ${this.cartCount} `;
+                }
+            }
+        },
+
+        methods: {
+            addcart() {
+                this.cartCount++;
+            },
+            removecart() {
+                this.cartCount--;
+                if (this.cartCount < 0) {
+                    this.cartCount = 0;
+                }
+            }
+        }
+    });
+
+    let checkout = new Vue({
+        el: '#checkout'
+        //data: {
+          //  message: 'Thank you for Purchasing'
+            //}
+    })
+
+    </script>
+</body>
+</html>
