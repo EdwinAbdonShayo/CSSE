@@ -9,11 +9,12 @@
     <link rel="Stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="webstore">
         <header>
             <h1> {{ message }} </h1>
-            <!-- <button v-on:click="checkout"> {{ checkoutText }} checkout</button> -->
-            <button> {{ checkoutText }} checkout</button>
+            <button v-on:click="tocheckout"> {{ checkoutText }} checkout</button>
+            <!-- <button> {{ checkoutText }} checkout</button> -->
         </header>
 
         <main>
@@ -26,6 +27,12 @@
             <button id="add-cart" v-on:click="addcart">add cart</button>
             <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
         </main>
+    </div>
+
+    <div id="checkout">
+        <header>
+            <h1> {{ message }} </h1>
+            <button>Back to Shopping</button>
     </div>
 
     <script>
@@ -51,6 +58,9 @@
                 else {
                     return ` ${this.cartCount} `;
                 }
+            }, 
+            tocheckout() {
+                
             }
         },
 
@@ -68,10 +78,10 @@
     });
 
     let checkout = new Vue({
-        el: '#checkout'
-        //data: {
-          //  message: 'Thank you for Purchasing'
-            //}
+        el: '#checkout',
+        data: {
+            message: 'Thank you for Purchasing'
+            }
     })
 
     </script>
