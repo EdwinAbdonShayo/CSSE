@@ -10,37 +10,42 @@
 </head>
 <body>
 
-    <div id="webstore">
-        <header>
-            <h1> {{ message }} </h1>
-            <button v-on:click="tocheckout"> {{ checkoutText }} checkout</button>
-            <!-- <button> {{ checkoutText }} checkout</button> -->
-        </header>
+    <div id="app">
+        <div v-if="currentPage === 'webstore'"></div>
+            <header>
+                <h1> {{ message }} </h1>
+                <button v-on:click="tocheckout"> {{ checkoutText }} checkout</button>
+                <!-- <button> {{ checkoutText }} checkout</button> -->
+            </header>
 
-        <main>
-            <figure>
-                <img v-bind:src="product.image" alt="cat image" width="100px" display="flex" flex-direction="column">
-                <h2 v-text="product.title"></h2>
-                <p v-text="product.description"></p>
-                <p>Price: ${{ product.price }}</p>
-            </figure>
-            <button id="add-cart" v-on:click="addcart">add cart</button>
-            <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
-        </main>
+            <main>
+                <figure>
+                    <img v-bind:src="product.image" alt="cat image" width="100px" display="flex" flex-direction="column">
+                    <h2 v-text="product.title"></h2>
+                    <p v-text="product.description"></p>
+                    <p>Price: ${{ product.price }}</p>
+                </figure>
+                <button id="add-cart" v-on:click="addcart">add cart</button>
+                <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
+            </main>
+        </div>
+
+        <div id="checkout">
+            <header>
+                <h1> {{message}} </h1>
+                <button>Back to Shopping</button>
+        </div>
     </div>
 
-    <div id="checkout">
-        <header>
-            <h1> {{ message }} </h1>
-            <button>Back to Shopping</button>
-    </div>
 
     <script>
-        let webstore = new Vue({
+        let app = new Vue({
             el: '#webstore',
             data: {
                 message: 'welcome to my pet store !!!',
+                checkoutMessage: 'Thank you for Purchasing',
                 cartCount: 0,
+                currentPage: 'webstore',
                 product: {
                     id: 10001,
                     title: 'cat food 25 Ib bag',
@@ -58,6 +63,7 @@
                 else {
                     return ` ${this.cartCount} `;
                 }
+                //return this.cartCount > 0 ? `${this.cartCount}` : '';
             }, 
             tocheckout() {
                 
@@ -69,20 +75,21 @@
                 this.cartCount++;
             },
             removecart() {
-                this.cartCount--;
-                if (this.cartCount < 0) {
-                    this.cartCount = 0;
+                //this.cartCount--;
+                if (this.cartCount > 0) {
+                    this.cartCount--;
                 }
-            }
+            },
+            go
         }
     });
 
-    let checkout = new Vue({
-        el: '#checkout',
-        data: {
-            message: 'Thank you for Purchasing'
-            }
-    })
+//    let checkout = new Vue({
+//        el: '#checkout',
+//        data: {
+//            message: 'Thank you for Purchasing'
+//            }
+//    })
 
     </script>
 </body>
