@@ -11,11 +11,10 @@
 <body>
 
     <div id="app">
-        <div v-if="currentPage === 'webstore'"></div>
+        <div v-if="currentPage === 'webstore'">
             <header>
                 <h1> {{ message }} </h1>
                 <button v-on:click="tocheckout"> {{ checkoutText }} checkout</button>
-                <!-- <button> {{ checkoutText }} checkout</button> -->
             </header>
 
             <main>
@@ -30,17 +29,18 @@
             </main>
         </div>
 
-        <div id="checkout">
-            <header>
-                <h1> {{message}} </h1>
-                <button>Back to Shopping</button>
+        <div v-if="currentPage === 'checkout'">
+            <main>
+                <h1>{{ checkoutMessage }}</h1>
+                <button v-on:click = "backToStore">Back to Shopping</button>
+            </main>
         </div>
     </div>
 
 
     <script>
         let app = new Vue({
-            el: '#webstore',
+            el: '#app',
             data: {
                 message: 'welcome to my pet store !!!',
                 checkoutMessage: 'Thank you for Purchasing',
@@ -64,9 +64,7 @@
                     return ` ${this.cartCount} `;
                 }
                 //return this.cartCount > 0 ? `${this.cartCount}` : '';
-            }, 
-            tocheckout() {
-                
+
             }
         },
 
@@ -75,21 +73,23 @@
                 this.cartCount++;
             },
             removecart() {
-                //this.cartCount--;
                 if (this.cartCount > 0) {
                     this.cartCount--;
                 }
             },
-            go
+            tocheckout() {
+                if (this.cartCount > 0 ){
+                    this.currentPage = 'checkout';
+                }
+                else {
+                    alert('The Cart is Empty');
+                }
+            },
+            backToStore() {
+                this.currentPage = 'webstore';
+            }
         }
     });
-
-//    let checkout = new Vue({
-//        el: '#checkout',
-//        data: {
-//            message: 'Thank you for Purchasing'
-//            }
-//    })
 
     </script>
 </body>
