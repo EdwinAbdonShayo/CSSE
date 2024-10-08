@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header#checkout {
+    display: flex;
+    flex-direction: row;
+}
+
+header#checkout button {
+    margin: 20px;
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}

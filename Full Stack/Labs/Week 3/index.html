@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET Depot</title>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <link rel="Stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app">
+        <div v-if="currentPage === 'webstore'">
+            <header>
+                <h1> {{ message }} </h1>
+                <button v-on:click="tocheckout"> {{ checkoutText }} checkout</button>
+            </header>
+
+            <main>
+                <figure>
+                    <img v-bind:src="product.image" alt="cat image" width="100px" display="flex" flex-direction="column">
+                    <h2 v-text="product.title"></h2>
+                    <p v-text="product.description"></p>
+                    <p>Price: ${{ product.price }}</p>
+                </figure>
+                <button id="add-cart" v-on:click="addcart">add cart</button>
+                <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
+            </main>
+        </div>
+
+        <div v-if="currentPage === 'checkout'">
+            <header id="checkout">
+                <h1>{{ checkoutMessage }}</h1>
+                <button v-on:click = "backToStore">Back to Shopping</button>
+            </header>
+
+            <main>
+                <form>
+                    <label for="fName">First Name</label>
+                    <input id="fName" v-model="fName1" type="text">
+                    <label for="lName">Last Name</label>
+                    <input id="lName" v-model="lName" type="text">
+                    <label for="address1">Address 1</label>
+                    <input id="address1" v-model="address1" type="text">
+                    <label for="address2">Address 2</label>
+                    <input id="address2" v-model="address2" type="text">
+                    <label for="tel">Telephone</label>
+                    <input id="tel" v-model="tel" type="tel">
+                    <label for="email">Email</label>
+                    <input id="email" v-model="email" type="email">
+                </form>
+
+                <div id="details">
+                    <h2>Your Details</h2>
+                    <p v-text>Names: {{ fName1 }} {{lName }}</p>
+                    <p>Address: {{ address1 }}, {{ address2 }}</p>
+                    <p>Email: {{ email }}</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'welcome to my pet store !!! (Week 3)',
+                checkoutMessage: 'Checkout Page',
+                cartCount: 0,
+                currentPage: 'webstore',
+                product: {
+                    id: 10001,
+                    title: 'cat food 25 Ib bag',
+                    description: 'my beautiful cat',
+                    price: 2000,
+                    image: 'Media/catFood.png'
+                }
+        },
+
+        computed: {
+            checkoutText() {
+                if (this.cartCount < 1) {
+                    return ``;
+                }
+                else {
+                    return ` ${this.cartCount} `;
+                }
+
+            }
+        },
+
+        methods: {
+            addcart() {
+                this.cartCount++;
+            },
+            removecart() {
+                if (this.cartCount > 0) {
+                    this.cartCount--;
+                }
+            },
+            tocheckout() {
+                if (this.cartCount > 0 ){
+                    this.currentPage = 'checkout';
+                }
+                else {
+                    alert('The Cart is Empty');
+                }
+            },
+            backToStore() {
+                this.currentPage = 'webstore';
+            }
+        }
+    });
+
+    </script>
+</body>
+</html>
