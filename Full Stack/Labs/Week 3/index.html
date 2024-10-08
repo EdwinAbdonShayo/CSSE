@@ -35,16 +35,14 @@
                 <button v-on:click = "backToStore">Back to Shopping</button>
             </header>
 
-            <main>
+            <main id="check">
                 <form>
                     <label for="fName">First Name</label>
                     <input id="fName" v-model="fName1" type="text">
                     <label for="lName">Last Name</label>
                     <input id="lName" v-model="lName" type="text">
-                    <label for="address1">Address 1</label>
+                    <label for="address1">Address</label>
                     <input id="address1" v-model="address1" type="text">
-                    <label for="address2">Address 2</label>
-                    <input id="address2" v-model="address2" type="text">
                     <label for="tel">Telephone</label>
                     <input id="tel" v-model="tel" type="tel">
                     <label for="email">Email</label>
@@ -53,10 +51,12 @@
 
                 <div id="details">
                     <h2>Your Details</h2>
-                    <p v-text>Names: {{ fName1 }} {{lName }}</p>
-                    <p>Address: {{ address1 }}, {{ address2 }}</p>
+                    <p>Names: {{ fName1 }} {{lName }}</p>
+                    <p>Address: {{ address1 }}</p>
                     <p>Email: {{ email }}</p>
+                    <p>Tel: {{ tel }}</p>
                 </div>
+                <button type="button">Place Order</button>
             </main>
         </div>
     </div>
@@ -76,7 +76,12 @@
                     description: 'my beautiful cat',
                     price: 2000,
                     image: 'Media/catFood.png'
-                }
+                },
+                fName1: '',
+                lName: '',
+                address1: '',
+                tel: '',
+                email: ''
         },
 
         computed: {

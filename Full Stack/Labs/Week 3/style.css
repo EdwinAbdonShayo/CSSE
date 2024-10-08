@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
 header#checkout {
@@ -15,7 +16,35 @@ header#checkout button {
     padding: 10px;
 }
 
+main#check {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    width: 80%;
+}
+
+input {
+    border: 1px solid hsl(0, 0%, 57%);
+    border-radius: 7px;
+    padding: 5px;
+}
+
+#details {
+    margin-top: 7%;
+    padding: 2%;
+    background: hsl(0, 0%, 80%);
+    border-radius: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 120%;
+    width: 100%;
+}
+
+#check button {
+    margin: 2%;
 }
