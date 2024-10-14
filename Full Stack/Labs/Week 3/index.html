@@ -28,6 +28,10 @@
                 <button id="add-cart" v-on:click="addcart">add cart</button>
                 <button id="remove-cart" v-on:click="removecart">Remove From Cart</button>
             </main>
+            <div>
+                <span v-for='n in product.rating'>★</span>
+                <span v-for='n in 5 - product.rating'>☆</span>
+            </div>
         </div>
 
         <div v-if="currentPage === 'checkout'">
