@@ -1,0 +1,23 @@
+{
+  "name": "project101",
+  "version": "1.0.0",
+  "description": "Trial Node project",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start, npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "trial"
+  ],
+  "author": "Edwin Abdon SHAYO",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {}
+}
