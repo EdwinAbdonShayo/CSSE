@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> 
+    <script src="products.js"></script>
+    <title>Pet Store</title>
+</head>
+<body>
+    <div id="webstore">
+        <header>
+            <h1> {{message}} </h1>
+            <button v-on:click="showCheckOut">
+                {{itemInCart}}
+                <span class="fa-solid fa-cart-plus"></span>
+                Check Out
+            </button>
+        </header>
+
+    <main>
+        <div class="container" v-if="showProduct">
+            <!--<div v-for="product in Products">-->
+            <div v-for="product in sortedProducts">
+            <figure>
+                <img v-bind:src="product.image" alt="Cat Image" width="200" height="200">
+            </figure>
+
+            <h2 v-text="product.title" ></h2>
+            <p v-text="product.description"></p>
+            <p>Price: {{product.price}} </p>
+
+            <button v-if="canAddtoCart(product)" @click="addItemtoCart (product)">Add to Cart</button>
+            <button v-else :disabled="true">Add to Cart</button>
+
+            
+            <span v-if='itemsLeft === 0'>All out!</span>
+            <span v-else-if="itemsLeft < 5">Only {{itemsLeft(product)}} left!</span>
+            <span v-else>Buy now!</span>
+        
+            <div>
+                <span v-for='n in product.rating'>★</span>
+                <span v-for='n in 5 - product.rating'>☆</span>
+            </div>
+        </div>
+        <div v-else>
+            <h1>Welcome to the CheckOut Page </h1>
+            <p>
+                <strong>First Name:</strong>
+                <!-- This input field is bound to 'firstName' in the 'order' object -->
+                <input v-model.trim="order.firstName"/>
+            </p>
+            <p>
+                <strong>Last Name:</strong>
+                <!-- This input field is bound to 'lastName' in the 'order' object -->
+                <input v-model.trim="order.lastName"/>
+            </p>
+            <p>
+                <strong>Address:</strong> <input v-model="order.address"/>
+            </p>
+            <p>
+                <strong>City:</strong> <input v-model="order.city"/>
+            </p>
+            <p>
+                <strong>State:</strong>
+                <select v-model="order.state">
+                    <option disabled value="">State</option>
+                    <option v-bind:value="states.AL">AL</option>
+                    <option v-bind:value="states.AR">AR</option>
+                    <option v-bind:value="states.CA">CA</option>
+                    <option v-bind:value="states.NV">NV</option>
+                </select>
+            </p>
+            <p>
+                <strong>Zip/Postal Code:</strong> <input v-model="order.zip"/>
+            </p>
+            <p><input type="checkbox" id="gift" value="true" v-model="order.gift"
+                v-bind:true-value="order.sendGift"
+                v-bind:false-value="order.noGift">
+                <label for="gift">Ship As Gift?</label>
+            </p>
+            <p>
+                <input type="radio" id="home" value="Home" v-model="order.method">
+                <label for="home">Home</label>
+                <input type="radio" id="business" value="Business" v-model="order.method">
+                <label for="business">Business</label>
+            </p>
+
+            <h2>Order Information</h2>
+            <p>First Name: {{order.firstName}}</p>
+            <p>Last Name: {{order.lastName}}</p>
+            <p>Address: {{order.address}}</p>
+            <p>City: {{order.city}}</p>
+            <p>Zip: {{order.zip}}</p>
+            <p>State: {{order.state}}</p>
+            <p>Gift:{{order.gift}}</p>
+            <p>Deliver to address: {{order.method}}</p>
+            <p>
+                <button @click="submitCheckOut">Place Order</button>
+            </p>
+
+            
+        </div>
+        
+       </main>
+    </div>
+<script>
+    let webstore = new Vue({
+        el: '#webstore',
+        data:{
+            message: 'Welcome to my Pet Store !!!!',
+            showProduct:true,
+            // product:{
+            //     id: 1001,
+            //     title:'Cat Food 25 lb bag',
+            //     description:'Irresistible cat food for your cat',
+            //     price:2000,
+            //     image:'images/product-fullsize.png',
+            //     availabilityInventory: 10,
+            //     rating:2
+            // },
+            products:products,
+            cart:[],
+            order:{
+                firstname:"",
+                lastname:"",
+                address:"",
+                city:"",
+                state:"",
+                zip:"",
+                method:"Home",
+                gift:false,
+                sendGift:"Send as Gift",
+                noGift:"Do not send as Gift"
+
+            },
+            states:{
+                AL:"Alabama",
+                AR:"Arizona",
+                CA:"California",
+                NV:"Nevada"
+            }
+        },
+        methods:{
+            addItemtoCart(product)
+            {
+                this.cart.push(product.id);
+            },
+            showCheckOut()
+            {
+                if(this.showProduct)
+                {
+                    this.showProduct = false;
+                }else{
+                    this.showProduct = true;
+                }
+            },
+            submitCheckOut(){
+                alert("Congratulations !! Check Out Completed !!");
+            },
+            canAddtoCart(product){
+                return product.availableInventory> this.cartCount(product.id);
+            },
+            cartCount(id)
+            {
+                let count = 0;
+                for (let i = 0; i < this.cart.length; i++)
+                {
+                    if (this.cart[i] === id)
+                    {
+                        count ++
+                    }
+                }
+                return count;
+            },
+            itemsLeft(product){
+                return this.product.availableInventory- this.cartCount(product.id);
+            }
+        },
+        computed:{
+            itemInCart:function()
+            {
+                return this.cart.length ||  "";
+            },
+            sortedProducts() {
+                    // the comparison function that defines the order
+                        function compare(a, b) {
+                            if (a.price > b.price) return 1;
+                            if (a.price < b.price) return -1;
+                            return 0;
+                            }
+                        // sort the 'products' array and return it
+                        return this.products.sort(compare);
+            }
+
+        }
+
+    });
+
+</script> 
+</body>
+</html>
