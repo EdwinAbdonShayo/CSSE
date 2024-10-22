@@ -1,0 +1,21 @@
+{
+  "name": "worksop101",
+  "version": "1.0.1",
+  "description": "Query Parameters",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm start",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "node",
+    "npm",
+    "query",
+    "js"
+  ],
+  "author": "Edwin Abdon SHAYO",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
