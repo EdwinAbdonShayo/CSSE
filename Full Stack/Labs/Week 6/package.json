@@ -1,0 +1,12 @@
+{
+  "name": "week-6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
