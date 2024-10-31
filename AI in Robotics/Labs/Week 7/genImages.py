@@ -32,6 +32,6 @@ def generate_augmented_images(input_image_path, output_folder):
         print(f"Saved: {output_path}")
 
 # Example usage
-input_image_path = "path/to/your/image.jpg"
-output_folder = "path/to/output/folder"
+input_image_path = "AI in Robotics\Labs\Week 7\dataset\Blue_0\Blue_0.jpg"
+output_folder = "AI in Robotics\Labs\Week 7\dataset2"
 generate_augmented_images(input_image_path, output_folder)
