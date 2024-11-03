@@ -2,8 +2,8 @@ import os
 from PIL import Image, ImageFilter, ImageEnhance
 
 # Define the root directory and the output directory
-ROOT_DIR = r'AI in Robotics/Labs/Week 7/dataset'
-OUTPUT_DIR = r'AI in Robotics/Labs/Week 7/dataset2'
+ROOT_DIR = r'AI in Robotics/Labs/Week 7/dataset2'
+OUTPUT_DIR = r'AI in Robotics/Labs/Week 7/UNO_dataset'
 
 # Image formats of interest
 IMAGE_FORMATS = ('.jpg', '.png', '.jpeg')
@@ -29,7 +29,7 @@ def define_transformations(img):
         ("original", img),
         ("grayscale", img.convert("L")),
         ("blur", img.filter(ImageFilter.BLUR)),
-        ("contour", img.filter(ImageFilter.CONTOUR)),
+        # ("contour", img.filter(ImageFilter.CONTOUR)),
         ("edge_enhance", img.filter(ImageFilter.EDGE_ENHANCE)),
         ("sharpen", img.filter(ImageFilter.SHARPEN)),
         ("detail", img.filter(ImageFilter.DETAIL)),

@@ -8,9 +8,9 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropou
 DATASET_PATH = './dataset'   
 
 # Set the image dimensions and batch size
-IMG_HEIGHT = 1280
-IMG_WIDTH = 960
-BATCH_SIZE = 32
+IMG_HEIGHT = 341
+IMG_WIDTH = 256
+BATCH_SIZE = 16
 
 # Preprocess the images using ImageDataGenerator
 datagen = ImageDataGenerator(
@@ -68,6 +68,9 @@ history = model.fit(
 )
 
 # Save the model
-MODEL_PATH = 'bottle_vs_spray_model.h5'
-model.save(MODEL_PATH)
-print(f'Model saved to {MODEL_PATH}')
+MODEL_PATH = 'unoModel.h5'
+try:
+    model.save(MODEL_PATH)
+    print(f'Model saved to {MODEL_PATH}')
+except Exception as e:
+    print(f'Error saving model: {e}')
