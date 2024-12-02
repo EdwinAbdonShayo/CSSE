@@ -31,8 +31,8 @@ def arm_move(p, s_time=500):
 
 # Positions for different actions
 p_front = [90, 60, 50, 50, 90]  # Front position
-p_right = [90, 60, 50, 50, 0]   # Right position
-p_left = [90, 60, 50, 50, 180]  # Left position
+p_right = [0, 60, 50, 50, 90]   # Right position
+p_left = [180, 60, 50, 50, 90]  # Left position
 p_top = [90, 80, 50, 50, 90]    # Top (transition) position
 p_rest = [90, 130, 0, 0, 90]    # Rest position
 
