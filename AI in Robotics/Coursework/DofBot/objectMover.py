@@ -68,9 +68,11 @@ def move_object(target):
     arm_move(p_top, 1000)
     arm_move(p_rest, 1000)
 
-# Example usage:
-move_object('left')  # Move object to the left
-time.sleep(1)
-move_object('right')  # Move object to the right
+# User input for selecting target side
+while True:
+    target = input("Enter target position ('left' or 'right', or 'exit' to quit): ").strip().lower()
+    if target == 'exit':
+        break
+    move_object(target)
 
 del Arm  # Release DOFBOT object
